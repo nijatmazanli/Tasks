@@ -1,30 +1,101 @@
-ul {
+body{
+  margin: 0%;
+  padding: 0%;
+}
+nav {
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+  background-color: #2c3e50;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
-    background-color: #333;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    margin: 0;
+
+  height: 108px;
+  }
+  ul{
+    align-items: center;
+    margin: 40px 0 ;
   }
   
   li {
-    float: left;
+    float: right;
+    
+  }
+  ul h1{
+    width: max-content;
+    height: max-content;
+    display: inline;
+    color: #fff;
+    text-align: center;
   }
   
-  li{
+  li {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
   }
   
   /* Change the link color to #111 (black) on hover */
   li a:hover {
-    background-color: #111;
-
+    color: #1abc9c;
+    
   }
   a{
-    color: rgb(37, 108, 121);
+    color:#fff;
     text-decoration: dashed;
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  
+  .active {
+    color: #fff;
+    background-color: #1abc9c;
+    height: fill;
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  .active:hover{
+    color: white;
 
   }
+  #mainhead{
+    
+ font-family:   "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+ font-weight: 900;
+ text-transform: uppercase !important;
+    text-decoration-line: none;
+text-decoration-style: solid;
+text-decoration-color: currentcolor;
+text-decoration-thickness: auto;
+    color:#fff;
+    text-decoration: dashed;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  
+  #main{
+    display: flex;
+background-color: #1abc9c;
+    /* width: 100%; */
+margin-right: auto;
+margin-left: auto;
+    height: 500px;
+    justify-content: center;
+    align-items: center !important;
+  }
+#md-main{
+
+  width: 240px;    
+  align-self: center;
+  justify-items: center;
+  align-items: center !important;
+
+  justify-content: center;
+  align-items: center;
+}
