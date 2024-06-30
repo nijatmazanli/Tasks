@@ -1,11 +1,4 @@
-let arr=[3,8,2,5,4,10,7,6]
-let max = arr[0]
-for (let i = 0; i < arr.length; i++) {
-    
-    // console.log(max,arr[i])
-    if (max<arr[i]){
-        max = arr[i]
-    }
-    
+let arr=[2,9,-5,-4,"AzerBayCan",true,12,"LANKARAN","LimOn",182,4]
+for(let i = 0 ;i<arr.length;i++){
+    if (typeof arr[i] === "boolean"){console.log(arr[i-1],arr[i+1])} 
 }
-console.log(max);
