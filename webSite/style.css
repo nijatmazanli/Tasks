@@ -80,22 +80,20 @@ text-decoration-thickness: auto;
   }
   
   #main{
-    display: flex;
+    display: flex ;
+    
 background-color: #1abc9c;
     /* width: 100%; */
 margin-right: auto;
 margin-left: auto;
-    height: 500px;
+    height: 650px;
     justify-content: center;
     align-items: center !important;
   }
 #md-main{
 
-  width: 240px;    
-  align-self: center;
+  width: 300px;    
   justify-items: center;
   align-items: center !important;
 
-  justify-content: center;
-  align-items: center;
 }
