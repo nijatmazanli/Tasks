@@ -79,21 +79,30 @@ text-decoration-thickness: auto;
     transition: 0.3s;
   }
   
-  #main{
+#main{
     display: flex ;
-    
-background-color: #1abc9c;
+    width: 100%;
+  background-color: #1abc9c;
     /* width: 100%; */
-margin-right: auto;
-margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
     height: 650px;
     justify-content: center;
-    align-items: center !important;
-  }
+    align-items: center ;   
+}
 #md-main{
 
   width: 300px;    
   justify-items: center;
   align-items: center !important;
 
+}
+#md-main h3{
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  
 }
