@@ -11,6 +11,6 @@ for (let i = 0; i < arr.length; i++){
         }
     }
     if (check == arr[i].length){
-        console.log(arr[i]);
+        console.log(arr[i],i);
     }
 }
