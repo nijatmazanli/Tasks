@@ -1,6 +1,6 @@
 * {
 font-family:Arial, Helvetica, sans-serif;
-font-size: 10px;
+font-size: 15 px;
   /* margin: 3px; */
   padding: 0;
   background-color: #122600 ;
@@ -52,13 +52,14 @@ ul {
     border-style: none;
     padding: 3px;
     margin-left:5px;
-    
+    margin-right: 2px;
 }   
 .unmark_butt{
     background-color: #C2FEBD;
     border-radius: 0px;
     border-style: none;
     padding: 3px;
+    margin-right: 2px;
 
 }
 .del_butt{
