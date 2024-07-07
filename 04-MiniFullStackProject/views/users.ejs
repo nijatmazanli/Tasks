@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Users</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/baskets">Baskets</a></li>
+            <li><a href="/favorites">Favorites</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Users</h1>
+        <div class="product-form">
+            <h2>Add New User</h2>
+            <form id="productForm">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="surname" placeholder="Surname" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button class="add-button" type="submit">Add User</button>
+            </form>
+        </div>
+        <div class="product-list">
+            <% users.forEach(user => { %>
+                <div class="card">
+                    <h3 style="width: 100px;"><%= user.name %></h3>
+                    <p>Surname: <%= user.surname %></p>
+                    <p>Email: <%= user.email %></p>
+                    <p>Password: <%= user.password %></p>
+                    <button class="edit-button" onclick="editProduct('<%= user.id %>')">Edit</button>
+                    <button class="delete-button" onclick="deleteUser('<%= user.id %>')">Delete</button>
+                </div>
+            <% }) %>
+        </div>
+
+        <script>
+            const forum = document.querySelector("#productForm")
+            forum.addEventListener("submit", (e) => {
+                e.preventDefault()
+                const formData = new FormData(e.target)
+                const newUser = {
+                    name: formData.get("name"),
+                    surname: formData.get("surname"),
+                    email: formData.get("email"),
+                    password: formData.get("password")
+                }
+                fetch("/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newUser)
+                })
+               .then(res => res.json())
+               .then(user => {
+                    window.location.reload()
+                })
+            })
+
+            const deleteUser = (id) => {
+                fetch(`/users/${id}`, {
+                    method: "DELETE"
+                })
+               .then(res => res.json())
+               .then(user => {
+                    window.location.reload()
+                })
+            }
+        </script>
+</body>
+</html>

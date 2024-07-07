@@ -1,100 +1,122 @@
-<!-- products_table.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <style>
-        /* Basic styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        h2 {
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px;
-            margin: 0;
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        td img {
-            max-width: 80px;
-            max-height: 80px;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Products</title>
 </head>
+
 <body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/baskets">Baskets</a></li>
+            <li><a href="/favorites">Favorites</a></li>
+        </ul>
+    </nav>
     <div class="container">
-        <h2>Product List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Stock</th>
-                    <th>Image</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% products.products.forEach(product => { %>
-                    <tr>
-                        <td><%= product.id %></td>
-                        <td><%= product.name %></td>
-                        <td>$ <%= product.price %></td>
-                        <td><%= product.desc %></td>
-                        <td><%= product.category %></td>
-                        <td><%= product.stock %></td>
-                        <td><img src="<%= product.imageUrl %>" alt="<%= product.name %>"></td>
-                        <td><%= product.createdAt %></td>
-                        <td><%= product.updatedAt %></td>
-                        <td><button id="<%= product.id %>">Delete</button></td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
-        <a href="http://localhost:3000/create"> Create new </a>
-    </div>
-<script>
-    const buttons = document.getElementsByTagName("button")
-    buttons[0].addEventListener("click",(e) =>{
-        const p_id = e.target.id
-        console.log(p_id)
-        
-        axios.delete("http://localhost:3000/product/"+p_id)
-    })
-</script>
+        <h1>Products</h1>
+        <div class="product-form">
+            <h2>Add New Product</h2>
+            <form id="productForm">
+                <input type="text" name="name" placeholder="Product Name" required>
+                <input type="text" name="desc" placeholder="Description" required>
+                <input type="number" name="stock" placeholder="Stock" required>
+                <input type="text" name="category" placeholder="Category" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <input type="text" name="imageUrl" placeholder="Image URL" required>
+                <button class="add-button" type="submit">Add Product</button>
+            </form>
+        </div>
+        <div class="product-list">
+            <% products.forEach(product=> { %>
+                <div class="card">
+                    <img src="<%= product.imageUrl %>" alt="<%= product.name %> Image">
+                 
+                    <div class="ppp">
+                        <h3>
+                            <%= product.name %>
+                        </h3>
+                    <p>Description: <%= product.desc %>
+                    </p>
+                    <p>Stock: <%= product.stock %>
+                    </p>
+                    <p>Category: <%= product.category %>
+                    </p>
+                    <p>Price: <%= product.price %>
+                    </p>
+                </div>
+                    <div class="buttons_div">
+                        <button class="edit-button" onclick="editProduct('<%= product.id %>')">Edit</button>
+                        <button class="delete-button" onclick="deleteProduct('<%= product.id %>')">Delete</button>
+                   
+                    <button style="     background-color: blue;" class="delete-button"
+                        onclick="addToFavorite('<%= product.id %>')">Add to favorite</button>
+                    <button style=" background-color: orange;" class="basket-button"
+                        onclick="addToBasket('<%= product.id %>')">Add to Basket</button>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+        <script>
+            const forum = document.querySelector("#productForm")
+            forum.addEventListener("submit", (e) => {
+                e.preventDefault()
+                const formData = new FormData(e.target)
+                const newProduct = {
+                    name: formData.get("name"),
+                    desc: formData.get("desc"),
+                    stock: formData.get("stock"),
+                    category: formData.get("category"),
+                    price: formData.get("price"),
+                    imageUrl: formData.get("imageUrl")
+                }
+                fetch("/products", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newProduct)
+                })
+                    .then(res => res.json())
+                    .then(product => {
+                        window.location.reload()
+                    })
+            })
+
+            const deleteProduct = (id) => {
+                fetch(`/products/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(product => {
+                        window.location.reload()
+                    })
+            }
+            const addToFavorite = (id) => {
+                fetch(`/products/add/favorites/${id}`, {
+                    method: "GET"
+                })
+                    .then(res => res.json())
+                    .then(product => {
+                        window.location.reload()
+                    })
+            }
+            const addToBasket = (id) => {
+                fetch(`/products/add/basket/${id}`, {
+                    method: "GET"
+                })
+                    .then(res => res.json())
+                    .then(product => {
+                        window.location.reload()
+                    })
+            }
+        </script>
 </body>
+
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css">
+        <title>Basket</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/baskets">Baskets</a></li>
+                <li><a href="/favorites">Favorites</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+            <h1>Basket</h1>
+            <div class="product-list">
+                <% basket.forEach(basket => { %>
+                    <div class="card">
+                        <img src="<%= basket.imageUrl %>" alt="<%= basket.name %> Image">
+                     
+                        <div class="ppp">
+                            <h3>
+                                <%= basket.name %>
+                            </h3>
+                        <p>Description: <%= basket.desc %>
+                        </p>
+                        <p>Stock: <%= basket.stock %>
+                        </p>
+                        <p>Category: <%= basket.category %>
+                        </p>
+                        <p>Price: <%= basket.price %>
+                        </p>
+                    </div>
+                        <div class="buttons_div">
+                            <button class="edit-button" onclick="editProduct('<%= basket.id %>')">Edit</button>
+                            <button class="delete-button" onclick="deleteProduct('<%= basket.id %>')">Delete</button>
+                       
+                        <button style="    background-color: blue;" class="delete-button"
+                            onclick="addToFavorite('<%= basket.id %>')">Add to favorite</button>
+                        <button style=" background-color: orange;" class="basket-button"
+                            onclick="addToBasket('<%= basket.id %>')">Add to Basket</button>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+               
+
+            <script>
+            
+                const deleteProduct = (id) => {
+                    fetch(`/baskets/${id}`, {
+                        method: "DELETE"
+                    })
+                    
+                .then(res => res.json())
+                .then(product => {
+                        window.location.reload()
+                    })
+                
+                    console.log("dsdsdsdsdsdd");
+                }
+
+            </script>
+        </div>
+        
+    </body>
+</html>

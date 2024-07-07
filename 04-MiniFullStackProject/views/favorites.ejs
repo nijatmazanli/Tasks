@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Favorites</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/baskets">Baskets</a></li>
+            <li><a href="/favorites">Favorites</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Favorites</h1>
+      
+        <div class="product-list">
+            <% favorites.forEach(favorite => { %>
+                <div class="card">
+                    <img src="<%= favorite.imageUrl %>" alt="<%= favorite.name %> Image">
+                 
+                    <div class="ppp">
+                        <h3>
+                            <%= favorite.name %>
+                        </h3>
+                    <p>Description: <%= favorite.desc %>
+                    </p>
+                    <p>Stock: <%= favorite.stock %>
+                    </p>
+                    <p>Category: <%= favorite.category %>
+                    </p>
+                    <p>Price: <%= favorite.price %>
+                    </p>
+                </div>
+                    <div class="buttons_div">
+                        <button class="edit-button" onclick="editProduct('<%= favorite.id %>')">Edit</button>
+                        <button class="delete-button" onclick="deleteProduct('<%= favorite.id %>')">Delete</button>
+                   
+                    <button style="    background-color: blue;" class="delete-button"
+                        onclick="addToFavorite('<%= favorite.id %>')">Add to favorite</button>
+                    <button style=" background-color: orange;" class="basket-button"
+                        onclick="addToBasket('<%= favorite.id %>')">Add to Basket</button>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+           
+        <script>
+            
+
+            const deleteProduct = (id) => {
+                fetch(`/favorites/del/${id}`, {
+                    method: "DELETE"
+                })
+               .then(res => res.json())
+               .then(product => {
+                    window.location.reload()
+                })
+            }
+        </script>
+</body>
+</html>
