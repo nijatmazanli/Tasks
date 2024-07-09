@@ -12,8 +12,8 @@ const port = 5000;
 
 app.get("/", (res, req) => {
     
-});
+})
 
 app.listen(port, () => {
   console.log("SDsd");
-});
+})
