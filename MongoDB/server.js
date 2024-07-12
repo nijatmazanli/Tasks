@@ -1,21 +1,18 @@
 const express = require("express");
 const ejs = require("ejs");
-const path = require("path");
-
-
+const mongoose = require("mongoose")
 
 const app = express();
 app.use(express.json());
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`APP is listening on ${PORT}`);
+});
 
 
-const port = 5000;
-
-app.get("/", (res, req) => {
-    res.render("home")
-})
-
-app.listen(port, () => {
-  console.log("SDsd");
-})
