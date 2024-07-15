@@ -51,6 +51,8 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+
+
 app.use("/products", productRoutes);
 app.use("/users", userRoutes);
 app.use("/favorites", favoriteRoutes);

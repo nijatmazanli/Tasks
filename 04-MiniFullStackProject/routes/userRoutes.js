@@ -44,7 +44,31 @@ router.get("/add/", (res, req) => {
 });
 
 
+router.get("/", (res, req) => {
+  const data = { name: "John Doe", age: 100 };
+  const sql = `INSERT INTO my_table (name, age) VALUES ("${data.name}", ${data.age})`;
 
+  connection.connect((error) => {
+    if (error) {
+      console.error("Error connecting to the MySQL database:", error);
+      return;
+    }
+    console.log("Successfully connected to the MySQL database.");
+  });
+
+  // Example query (replace with your desired query)
+
+  connection.query(sql, (error, results) => {
+    if (error) {
+      console.error("Error executing query:", error);
+      return;
+    }
+    console.log("Query results:", results);
+  });
+  res.send(200).json(results);
+  
+});
+ 
 
 router.get("/:id", (req, res) => {
   connection.connect((error) => {
@@ -65,7 +89,7 @@ router.get("/:id", (req, res) => {
     }
     console.log("Query results:", results);
   });
-  res.send(200).json(sql);
+  res.send(200).json(results);
 });
 router.get("/", (req, res) => {
   const users = readData();
